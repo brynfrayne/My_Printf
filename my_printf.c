@@ -1,7 +1,7 @@
-#include "bryn_my_printf.h"
+#include "my_printf.h"
 
 int main()
-{   
+{
     char character = '9';
     char* char_ptr = &character;
     // printf("char_ptr: %s\n", char_ptr);
@@ -55,13 +55,13 @@ int main()
 }
 
 
-// printf will return the length of the final string 
+// printf will return the length of the final string
 
 int my_printf(char * restrict format, ...){
-    
+
     va_list args;
     va_start(args, format);
-    
+
     int length = 0;
     char* strVal;
     char charVal;
@@ -82,8 +82,8 @@ int my_printf(char * restrict format, ...){
             switch(format[i]){
 
                 case 'd':
-                    
-                    intVal = va_arg(args, int);                    
+
+                    intVal = va_arg(args, int);
 
                     if(intVal == 0){
                         my_putChar('0');
@@ -96,9 +96,9 @@ int my_printf(char * restrict format, ...){
                         length += my_strLen(strVal);
                         break;
                     }
-                    
+
                 case 'o':
-                    
+
                     intVal = va_arg(args, int);
                     strVal = my_itoa(intVal, str, 8);
                     my_putStr(strVal);
@@ -106,15 +106,15 @@ int my_printf(char * restrict format, ...){
                     break;
 
                 case 'u':
-                    
+
                     intVal = va_arg(args, int);
                     strVal = my_itoa(intVal, str, 10);
                     my_putStr(strVal);
                     length += my_strLen(strVal);
                     break;
-                
+
                 case 'x':
-                    
+
                     intVal = va_arg(args, int);
                     strVal = my_itoa(intVal, str, 16);
                     my_putStr(strVal);
@@ -142,9 +142,9 @@ int my_printf(char * restrict format, ...){
                     my_putChar(charVal);
                     length ++;
                     break;
-                
+
                 case 'p':
-                    
+
                     ptrVal = va_arg(args, long);
                     my_putStr("0x");
                     length += my_strLen("0x");
@@ -157,7 +157,7 @@ int my_printf(char * restrict format, ...){
                     break;
 
             }
-        }        
+        }
     }
     va_end(args);
     return length;
